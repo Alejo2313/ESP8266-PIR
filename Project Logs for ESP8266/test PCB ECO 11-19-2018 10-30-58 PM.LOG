@@ -1,0 +1,13 @@
+Change Component Comment : Designator=U1 Old Comment=* New Comment=ESP8266EX
+Change Component Comment : Designator=Y1 Old Comment=* New Comment=FA-128 26.0000MF10Z-W5
+Change Component Comment : Designator=VR1 Old Comment=* New Comment=LD1117S33TR
+Change Component Designator: OldDesignator=C1 NewDesignator=C2
+Change Component Designator: OldDesignator=C2 NewDesignator=C1
+Added Member To Class: ClassName=Sensor Member=Component C* (C16) 0.1UF
+Added Member To Class: ClassName=Sensor Member=Component C* (C17) 0.1UF
+Added Member To Class: ClassName=Sensor Member=Component C? (C15) 33UF
+Added Member To Class: ClassName=Sensor Member=Component R? (R10) 47K
+Added Member To Class: ClassName=Sensor Member=Component R? (R8) 10K
+Added Member To Class: ClassName=Sensor Member=Component R? (R7) 560K
+Added Member To Class: ClassName=Sensor Member=Component R? (R6) 10K
+Added Room: Name=MCU

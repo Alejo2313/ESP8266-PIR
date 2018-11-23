@@ -1,0 +1,844 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://D:\Users\Public\Documents\Altium\AD17\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">11/23/2018</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">11:32:30 AM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:03</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc" class="file"><acronym title="D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc">D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">1</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">163</td></tr>
+</table>
+</td>
+</table><a name="IDMQCNW1VL0MQWL5BQLGXBQICO1P1PGUZEFOIFPMIOWRP1EVNO1GAE"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDRWETUZ41AGWDJY5KXANGVUCNVKFZPMXOG2CMFWP4A4WVQ3UGYKZ">Your board contains 1 shelved polygon - copper connectivity will not be reported correctly. Unshelve polygons and re-run DRC check before  producing manufacturing outputs.</a></td>
+<td class="column2">1</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">1</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDK0NND51CBQLMEDLRTQH5ZI3VEE04A4YNDNJXPOPVYH423Z42AJ">Clearance Constraint (Gap=0.152mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDBIYGPLWKVG1DEWJTLBZIHU4VXIPWB2BQQFP4TMI35ACMMTI0L5C">Short-Circuit Constraint (Allowed=Yes) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDBFKYPRKD0YPPFZXI1L4M2RNPPJQWHLKK24D2RJ1ULN3OWNXGSUC">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">90</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDTOOAC3DYKHTLL312I5XBXSTB0M1I0KXOL4HSGCJZXEQ4BPIY1KAI">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDPTK12YHMUYGFC4CUCXJVM3GBAGVGUUZBGEQRE3PQORHAQSMNSRJB">Width Constraint (Min=0.152mm) (Max=20mm) (Preferred=0.203mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIQ2YXJWDTVPKPS1Q0VWIZ2NCZCXM3PB3TFPKIOD0LVMNM1C3UP0H">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDUQ1B3AG1HZRGDDCYSL1VOXNM4J5YXPP5W4VVJ3LIAQYMMTF2KGGK">Hole Size Constraint (Min=0.3mm) (Max=6.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID1M0XRWDEJ2S4GEFQRX2DQWSTEEMAAVQVFKFN1ZXI2L3YW1LHKFE">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXMHK23ZMFUIBP3W42JOTXPP4OMJ2OPDPGALXKJFL13WC0BGHOQPB">Minimum Solder Mask Sliver (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">69</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWMCVKIUOSIW1IOEW1MUPZ3SXMMYFBPZ4ZS54MKL4QTKQRT2QNUZH">Silk To Solder Mask (Clearance=0mm) (IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDRJ5GE4EKRT2QIRYCAACF5DIJTDMUHEJARMMUUROLF2DSESGPFEAM">Silk to Silk (Clearance=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDYOEH5MW5HWOFL4KRAL1PG5FDMPJBEQXPXMOAJ1F5RDJBRAT1ECXK">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDPXG2QVXYOQNXCIQUYFBQOA41NMNPCEA1RBN2O0HBOFVYU1NW4P4G">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">163</td>
+</tr>
+</table><br><a name="IDR4DUDO4EY2RHP3ZIU1YY2RUHKFCYVXPLB2O24QIWZVC4C1NXAQ3H"><h2>Warnings</h2></a><a name="IDRWETUZ41AGWDJY5KXANGVUCNVKFZPMXOG2CMFWP4A4WVQ3UGYKZ"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Your board contains 1 shelved polygon - copper connectivity will not be reported correctly. Unshelve polygons and re-run DRC check before  producing manufacturing outputs.</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Polygon named: Top Layer-No Net In net GND On Top Layer</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDDBFKYPRKD0YPPFZXI1L4M2RNPPJQWHLKK24D2RJ1ULN3OWNXGSUC"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1779.496mil|Location2.X=2149.393mil|Location1.Y=3375.559mil|Location2.Y=3575.222mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1779.496mil|Location2.X=2149.393mil|Location1.Y=3375.559mil|Location2.Y=3575.222mil|Absolute=True">Un-Routed Net Constraint: Net TOUT Between Pad P2-6(46mm,86.54mm) on Multi-Layer And Pad U1-6(54.419mm,90.36mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2753.512mil|Location2.X=2804.756mil|Location1.Y=3573.749mil|Location2.Y=3725.7mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2753.512mil|Location2.X=2804.756mil|Location1.Y=3573.749mil|Location2.Y=3725.7mil|Absolute=True">Un-Routed Net Constraint: Net NetR15_2 Between Pad R16-1(70.59mm,91.424mm) on Top Layer And Pad R15-2(70.623mm,94.107mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2753.512mil|Location2.X=3340.505mil|Location1.Y=3495.007mil|Location2.Y=3639.52mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2753.512mil|Location2.X=3340.505mil|Location1.Y=3495.007mil|Location2.Y=3639.52mil|Absolute=True">Un-Routed Net Constraint: Net NetC12_1 Between Pad R16-3(70.59mm,89.424mm) on Top Layer And Pad C12-1(84.328mm,91.973mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2233.977mil|Location2.X=3122.103mil|Location1.Y=3062.457mil|Location2.Y=3384.276mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2233.977mil|Location2.X=3122.103mil|Location1.Y=3062.457mil|Location2.Y=3384.276mil|Absolute=True">Un-Routed Net Constraint: Net NetU1_24 Between Pad U1-24(56.919mm,85.51mm) on Top Layer And Pad U?-8(78.951mm,78.562mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2388.591mil|Location2.X=2502.905mil|Location1.Y=3393.17mil|Location2.Y=3433.208mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2388.591mil|Location2.X=2502.905mil|Location1.Y=3393.17mil|Location2.Y=3433.208mil|Absolute=True">Un-Routed Net Constraint: Net XTAL_OUT Between Pad C1-1(61.196mm,86.662mm) on Top Layer And Pad Y1-3(63.048mm,86.728mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2249.724mil|Location2.X=2429.993mil|Location1.Y=3393.17mil|Location2.Y=3439.395mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2249.724mil|Location2.X=2429.993mil|Location1.Y=3393.17mil|Location2.Y=3439.395mil|Absolute=True">Un-Routed Net Constraint: Net XTAL_OUT Between Pad U1-27(57.594mm,87.185mm) on Top Layer And Pad C1-1(61.196mm,86.662mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2518.591mil|Location2.X=2634.993mil|Location1.Y=3441.02mil|Location2.Y=3479.784mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2518.591mil|Location2.X=2634.993mil|Location1.Y=3441.02mil|Location2.Y=3479.784mil|Absolute=True">Un-Routed Net Constraint: Net XTAL_IN Between Pad Y1-1(64.498mm,87.878mm) on Top Layer And Pad C2-1(66.403mm,87.911mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2249.724mil|Location2.X=2559.993mil|Location1.Y=3441.02mil|Location2.Y=3478.484mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2249.724mil|Location2.X=2559.993mil|Location1.Y=3441.02mil|Location2.Y=3478.484mil|Absolute=True">Un-Routed Net Constraint: Net XTAL_IN Between Pad U1-28(57.594mm,87.685mm) on Top Layer And Pad Y1-1(64.498mm,87.878mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2778.591mil|Location2.X=2892.016mil|Location1.Y=3131.606mil|Location2.Y=3196.874mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2778.591mil|Location2.X=2892.016mil|Location1.Y=3131.606mil|Location2.Y=3196.874mil|Absolute=True">Un-Routed Net Constraint: Net VREF Between Pad C16-2(71.102mm,80.725mm) on Top Layer And Pad Q1-1(73mm,80mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2856.016mil|Location2.X=3172.103mil|Location1.Y=3131.606mil|Location2.Y=3338.109mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2856.016mil|Location2.X=3172.103mil|Location1.Y=3131.606mil|Location2.Y=3338.109mil|Absolute=True">Un-Routed Net Constraint: Net VREF Between Pad Q1-1(73mm,80mm) on Multi-Layer And Pad U?-6(80.221mm,84.012mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2660.253mil|Location2.X=2824.363mil|Location1.Y=2846.04mil|Location2.Y=2908.126mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2660.253mil|Location2.X=2824.363mil|Location1.Y=2846.04mil|Location2.Y=2908.126mil|Absolute=True">Un-Routed Net Constraint: Net VIN Between Pad U3-4(67.921mm,73.391mm) on Top Layer And Pad C8-1(71.213mm,72.765mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2782.961mil|Location2.X=3219.717mil|Location1.Y=2602.881mil|Location2.Y=2883.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2782.961mil|Location2.X=3219.717mil|Location1.Y=2602.881mil|Location2.Y=2883.504mil|Absolute=True">Un-Routed Net Constraint: Net VIN Between Pad C8-1(71.213mm,72.765mm) on Top Layer And Pad P3-1(81.23mm,66.664mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2448.134mil|Location2.X=2646.393mil|Location1.Y=2432.865mil|Location2.Y=2474.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2448.134mil|Location2.X=2646.393mil|Location1.Y=2432.865mil|Location2.Y=2474.267mil|Absolute=True">Un-Routed Net Constraint: Net VBAT Between Pad C9-1(62.658mm,62.321mm) on Top Layer And Pad VR1-3(66.043mm,62.281mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2553.811mil|Location2.X=2687.875mil|Location1.Y=2434.268mil|Location2.Y=2807.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2553.811mil|Location2.X=2687.875mil|Location1.Y=2434.268mil|Location2.Y=2807.732mil|Absolute=True">Un-Routed Net Constraint: Net VBAT Between Pad VR1-3(66.043mm,62.281mm) on Top Layer And Pad U3-3(67.921mm,70.841mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2183.039mil|Location2.X=2485.598mil|Location1.Y=2432.865mil|Location2.Y=2659.481mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2183.039mil|Location2.X=2485.598mil|Location1.Y=2432.865mil|Location2.Y=2659.481mil|Absolute=True">Un-Routed Net Constraint: Net VBAT Between Pad P1-1(56mm,67mm) on Multi-Layer And Pad C9-1(62.658mm,62.321mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2028.063mil|Location2.X=2149.393mil|Location1.Y=3062.755mil|Location2.Y=3384.276mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2028.063mil|Location2.X=2149.393mil|Location1.Y=3062.755mil|Location2.Y=3384.276mil|Absolute=True">Un-Routed Net Constraint: Net SWP/SD3 Between Pad U2-3(52.414mm,78.145mm) on Top Layer And Pad U1-19(54.419mm,85.51mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2115.865mil|Location2.X=2378.521mil|Location1.Y=3112.755mil|Location2.Y=3384.276mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2115.865mil|Location2.X=2378.521mil|Location1.Y=3112.755mil|Location2.Y=3384.276mil|Absolute=True">Un-Routed Net Constraint: Net SHD/SD3 Between Pad U1-18(53.919mm,85.51mm) on Top Layer And Pad U2-7(59.514mm,79.415mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2028.063mil|Location2.X=2208.447mil|Location1.Y=3112.755mil|Location2.Y=3384.276mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2028.063mil|Location2.X=2208.447mil|Location1.Y=3112.755mil|Location2.Y=3384.276mil|Absolute=True">Un-Routed Net Constraint: Net SDO/SD0 Between Pad U2-2(52.414mm,79.415mm) on Top Layer And Pad U1-22(55.919mm,85.51mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2214.291mil|Location2.X=2378.521mil|Location1.Y=3012.755mil|Location2.Y=3384.276mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2214.291mil|Location2.X=2378.521mil|Location1.Y=3012.755mil|Location2.Y=3384.276mil|Absolute=True">Un-Routed Net Constraint: Net SDI/SD1 Between Pad U1-23(56.419mm,85.51mm) on Top Layer And Pad U2-5(59.514mm,76.875mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2028.063mil|Location2.X=2169.077mil|Location1.Y=3162.755mil|Location2.Y=3384.276mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2028.063mil|Location2.X=2169.077mil|Location1.Y=3162.755mil|Location2.Y=3384.276mil|Absolute=True">Un-Routed Net Constraint: Net SCS/CMD Between Pad U2-1(52.414mm,80.685mm) on Top Layer And Pad U1-20(54.919mm,85.51mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2307.591mil|Location2.X=2448.569mil|Location1.Y=3060.693mil|Location2.Y=3098.157mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2307.591mil|Location2.X=2448.569mil|Location1.Y=3060.693mil|Location2.Y=3098.157mil|Absolute=True">Un-Routed Net Constraint: Net SCK/CLK Between Pad U2-6(59.514mm,78.145mm) on Top Layer And Pad R2-2(61.668mm,78.217mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.496mil|Location2.X=2285.22mil|Location1.Y=3475.559mil|Location2.Y=3538.613mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.496mil|Location2.X=2285.22mil|Location1.Y=3475.559mil|Location2.Y=3538.613mil|Absolute=True">Un-Routed Net Constraint: Net RST Between Pad P2-3(43.46mm,89.08mm) on Multi-Layer And Pad U1-32(57.594mm,89.685mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2618.118mil|Location2.X=2792.016mil|Location1.Y=3031.606mil|Location2.Y=3091.701mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2618.118mil|Location2.X=2792.016mil|Location1.Y=3031.606mil|Location2.Y=3091.701mil|Absolute=True">Un-Routed Net Constraint: Net OP1_P Between Pad C18-1(66.976mm,78.003mm) on Top Layer And Pad Q1-2(70.46mm,77.46mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2618.118mil|Location2.X=2655.582mil|Location1.Y=3050.299mil|Location2.Y=3247.716mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2618.118mil|Location2.X=2655.582mil|Location1.Y=3050.299mil|Location2.Y=3247.716mil|Absolute=True">Un-Routed Net Constraint: Net OP1_P Between Pad R12-2(66.974mm,81.991mm) on Top Layer And Pad C18-1(66.976mm,78.003mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2619.008mil|Location2.X=3222.103mil|Location1.Y=3208.284mil|Location2.Y=3338.109mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2619.008mil|Location2.X=3222.103mil|Location1.Y=3208.284mil|Location2.Y=3338.109mil|Absolute=True">Un-Routed Net Constraint: Net OP1_P Between Pad R12-2(66.974mm,81.991mm) on Top Layer And Pad U?-5(81.491mm,84.012mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2455.961mil|Location2.X=2613.071mil|Location1.Y=2847.008mil|Location2.Y=2908.126mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2455.961mil|Location2.X=2613.071mil|Location1.Y=2847.008mil|Location2.Y=2908.126mil|Absolute=True">Un-Routed Net Constraint: Net NetR3_1 Between Pad R3-1(62.907mm,72.74mm) on Top Layer And Pad U3-5(66.021mm,73.391mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2174.921mil|Location2.X=2448.569mil|Location1.Y=3113.843mil|Location2.Y=3384.276mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2174.921mil|Location2.X=2448.569mil|Location1.Y=3113.843mil|Location2.Y=3384.276mil|Absolute=True">Un-Routed Net Constraint: Net NetR2_1 Between Pad U1-21(55.419mm,85.51mm) on Top Layer And Pad R2-1(61.668mm,79.567mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2249.724mil|Location2.X=2372.19mil|Location1.Y=3504.293mil|Location2.Y=3669.7mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2249.724mil|Location2.X=2372.19mil|Location1.Y=3504.293mil|Location2.Y=3669.7mil|Absolute=True">Un-Routed Net Constraint: Net NetR1_1 Between Pad U1-31(57.594mm,89.185mm) on Top Layer And Pad R1-1(59.828mm,92.685mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1847.504mil|Location2.X=1960.48mil|Location1.Y=4050.865mil|Location2.Y=4092.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1847.504mil|Location2.X=1960.48mil|Location1.Y=4050.865mil|Location2.Y=4092.267mil|Absolute=True">Un-Routed Net Constraint: Net NetD1_1 Between Pad D1-1(47.377mm,103.418mm) on Top Layer And Pad R11-1(49.37mm,103.418mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3114.3mil|Location2.X=3250.796mil|Location1.Y=3649.623mil|Location2.Y=3686.693mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3114.3mil|Location2.X=3250.796mil|Location1.Y=3649.623mil|Location2.Y=3686.693mil|Absolute=True">Un-Routed Net Constraint: Net NetC15_1 Between Pad R8-1(79.629mm,93.131mm) on Top Layer And Pad C15-1(82.049mm,93.171mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3210.984mil|Location2.X=3248.448mil|Location1.Y=3399.849mil|Location2.Y=3537.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3210.984mil|Location2.X=3248.448mil|Location1.Y=3399.849mil|Location2.Y=3537.267mil|Absolute=True">Un-Routed Net Constraint: Net NetC14_2 Between Pad R7-1(82.018mm,86.857mm) on Top Layer And Pad C14-2(82.035mm,89.321mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3209.788mil|Location2.X=3250.796mil|Location1.Y=3495.865mil|Location2.Y=3638.661mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3209.788mil|Location2.X=3250.796mil|Location1.Y=3495.865mil|Location2.Y=3638.661mil|Absolute=True">Un-Routed Net Constraint: Net NetC14_2 Between Pad C14-2(82.035mm,89.321mm) on Top Layer And Pad C15-2(82.049mm,91.951mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3211.3mil|Location2.X=3272.103mil|Location1.Y=3277.023mil|Location2.Y=3439.282mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3211.3mil|Location2.X=3272.103mil|Location1.Y=3277.023mil|Location2.Y=3439.282mil|Absolute=True">Un-Routed Net Constraint: Net NetC14_2 Between Pad R7-1(82.018mm,86.857mm) on Top Layer And Pad U?-4(82.761mm,84.012mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3343.236mil|Location2.X=3382.866mil|Location1.Y=2868.732mil|Location2.Y=2985.701mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3343.236mil|Location2.X=3382.866mil|Location1.Y=2868.732mil|Location2.Y=2985.701mil|Absolute=True">Un-Routed Net Constraint: Net NetC13_1 Between Pad R5-1(85.344mm,75.311mm) on Top Layer And Pad C13-1(85.449mm,73.392mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3343.236mil|Location2.X=3376.764mil|Location1.Y=2944.299mil|Location2.Y=3123.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3343.236mil|Location2.X=3376.764mil|Location1.Y=2944.299mil|Location2.Y=3123.543mil|Absolute=True">Un-Routed Net Constraint: Net NetC13_1 Between Pad U?-13(85.301mm,78.562mm) on Top Layer And Pad R5-1(85.344mm,75.311mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3299.497mil|Location2.X=3440.993mil|Location1.Y=3650.481mil|Location2.Y=3687.552mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3299.497mil|Location2.X=3440.993mil|Location1.Y=3650.481mil|Location2.Y=3687.552mil|Absolute=True">Un-Routed Net Constraint: Net NetC12_2 Between Pad C12-2(84.328mm,93.193mm) on Top Layer And Pad R6-1(86.875mm,93.236mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.544mil|Location2.X=3301.598mil|Location1.Y=3399.849mil|Location2.Y=3537.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.544mil|Location2.X=3301.598mil|Location1.Y=3399.849mil|Location2.Y=3537.267mil|Absolute=True">Un-Routed Net Constraint: Net NetC14_1 Between Pad R7-2(83.218mm,86.857mm) on Top Layer And Pad C14-1(83.385mm,89.321mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.544mil|Location2.X=3322.103mil|Location1.Y=3277.023mil|Location2.Y=3439.282mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.544mil|Location2.X=3322.103mil|Location1.Y=3277.023mil|Location2.Y=3439.282mil|Absolute=True">Un-Routed Net Constraint: Net NetC14_1 Between Pad R7-2(83.218mm,86.857mm) on Top Layer And Pad U?-3(84.031mm,84.012mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2875.559mil|Location2.X=3301.598mil|Location1.Y=3495.865mil|Location2.Y=3593.497mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2875.559mil|Location2.X=3301.598mil|Location1.Y=3495.865mil|Location2.Y=3593.497mil|Absolute=True">Un-Routed Net Constraint: Net NetC14_1 Between Pad R16-2(73.84mm,90.424mm) on Top Layer And Pad C14-1(83.385mm,89.321mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3392.166mil|Location2.X=3430.174mil|Location1.Y=3405.865mil|Location2.Y=3538.282mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3392.166mil|Location2.X=3430.174mil|Location1.Y=3405.865mil|Location2.Y=3538.282mil|Absolute=True">Un-Routed Net Constraint: Net NetC11_2 Between Pad R4-2(86.612mm,89.372mm) on Top Layer And Pad C11-2(86.651mm,87.035mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3392.71mil|Location2.X=3430.174mil|Location1.Y=3277.023mil|Location2.Y=3447.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3392.71mil|Location2.X=3430.174mil|Location1.Y=3277.023mil|Location2.Y=3447.267mil|Absolute=True">Un-Routed Net Constraint: Net NetC11_2 Between Pad U?-1(86.571mm,84.012mm) on Top Layer And Pad C11-2(86.651mm,87.035mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3339.56mil|Location2.X=3380.418mil|Location1.Y=3405.865mil|Location2.Y=3538.282mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3339.56mil|Location2.X=3380.418mil|Location1.Y=3405.865mil|Location2.Y=3538.282mil|Absolute=True">Un-Routed Net Constraint: Net NetC11_1 Between Pad C11-1(85.301mm,87.035mm) on Top Layer And Pad R4-1(85.412mm,89.372mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3339.56mil|Location2.X=3377.024mil|Location1.Y=3277.023mil|Location2.Y=3447.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3339.56mil|Location2.X=3377.024mil|Location1.Y=3277.023mil|Location2.Y=3447.267mil|Absolute=True">Un-Routed Net Constraint: Net NetC11_1 Between Pad U?-2(85.301mm,84.012mm) on Top Layer And Pad C11-1(85.301mm,87.035mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.922mil|Location2.X=3440.993mil|Location1.Y=3498.849mil|Location2.Y=3634.33mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.922mil|Location2.X=3440.993mil|Location1.Y=3498.849mil|Location2.Y=3634.33mil|Absolute=True">Un-Routed Net Constraint: Net NetC11_1 Between Pad R4-1(85.412mm,89.372mm) on Top Layer And Pad R6-2(86.875mm,91.886mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2447.816mil|Location2.X=2555.135mil|Location1.Y=3877.298mil|Location2.Y=3918.7mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2447.816mil|Location2.X=2555.135mil|Location1.Y=3877.298mil|Location2.Y=3918.7mil|Absolute=True">Un-Routed Net Constraint: Net LNA Between Pad C7-1(62.695mm,98.999mm) on Top Layer And Pad L1-2(64.425mm,99.009mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2214.291mil|Location2.X=2488.824mil|Location1.Y=3539.726mil|Location2.Y=3916.133mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2214.291mil|Location2.X=2488.824mil|Location1.Y=3539.726mil|Location2.Y=3916.133mil|Absolute=True">Un-Routed Net Constraint: Net LNA Between Pad U1-2(56.419mm,90.36mm) on Top Layer And Pad C7-1(62.695mm,98.999mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1782.544mil|Location2.X=3172.103mil|Location1.Y=3062.457mil|Location2.Y=4089.314mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1782.544mil|Location2.X=3172.103mil|Location1.Y=3062.457mil|Location2.Y=4089.314mil|Absolute=True">Un-Routed Net Constraint: Net LED Between Pad D1-2(45.727mm,103.418mm) on Top Layer And Pad U?-9(80.221mm,78.562mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.496mil|Location2.X=2110.023mil|Location1.Y=3375.559mil|Location2.Y=3575.222mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.496mil|Location2.X=2110.023mil|Location1.Y=3375.559mil|Location2.Y=3575.222mil|Absolute=True">Un-Routed Net Constraint: Net GPIO16 Between Pad P2-5(43.46mm,86.54mm) on Multi-Layer And Pad U1-8(53.419mm,90.36mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602mil|Location2.X=2692.016mil|Location1.Y=3131.606mil|Location2.Y=3641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602mil|Location2.X=2692.016mil|Location1.Y=3131.606mil|Location2.Y=3641mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Via (66.446mm,92.126mm) from Top Layer to Bottom Layer And Pad Q1-3(67.92mm,80mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602mil|Location2.X=2650.473mil|Location1.Y=2770.268mil|Location2.Y=3641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602mil|Location2.X=2650.473mil|Location1.Y=2770.268mil|Location2.Y=3641mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Via (66.446mm,92.126mm) from Top Layer to Bottom Layer And Pad U3-2(66.971mm,70.841mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1984.811mil|Location2.X=2129.707mil|Location1.Y=3539.726mil|Location2.Y=3904.702mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1984.811mil|Location2.X=2129.707mil|Location1.Y=3539.726mil|Location2.Y=3904.702mil|Absolute=True">Un-Routed Net Constraint: Net CH_PU Between Pad R14-2(50.84mm,98.654mm) on Top Layer And Pad U1-7(53.919mm,90.36mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2570.82mil|Location2.X=2678.334mil|Location1.Y=3877.298mil|Location2.Y=3918.7mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2570.82mil|Location2.X=2678.334mil|Location1.Y=3877.298mil|Location2.Y=3918.7mil|Absolute=True">Un-Routed Net Constraint: Net ANT Between Pad L1-1(65.775mm,99.009mm) on Top Layer And Pad C6-1(67.504mm,98.998mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2636.932mil|Location2.X=2820.843mil|Location1.Y=3878.842mil|Location2.Y=4136.842mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2636.932mil|Location2.X=2820.843mil|Location1.Y=3878.842mil|Location2.Y=4136.842mil|Absolute=True">Un-Routed Net Constraint: Net ANT Between Pad C6-1(67.504mm,98.998mm) on Top Layer And Pad -1(71.399mm,104.826mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2249.724mil|Location2.X=2285.22mil|Location1.Y=3464.923mil|Location2.Y=3498.449mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2249.724mil|Location2.X=2285.22mil|Location1.Y=3464.923mil|Location2.Y=3498.449mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad U1-29(57.594mm,88.185mm) on Top Layer And Pad U1-30(57.594mm,88.685mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2174.921mil|Location2.X=2208.447mil|Location1.Y=3539.726mil|Location2.Y=3575.222mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2174.921mil|Location2.X=2208.447mil|Location1.Y=3539.726mil|Location2.Y=3575.222mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad U1-4(55.419mm,90.36mm) on Top Layer And Pad U1-3(55.919mm,90.36mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2194.605mil|Location2.X=2247.819mil|Location1.Y=3539.726mil|Location2.Y=3575.222mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2194.605mil|Location2.X=2247.819mil|Location1.Y=3539.726mil|Location2.Y=3575.222mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad U1-3(55.919mm,90.36mm) on Top Layer And Pad U1-1(56.919mm,90.36mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1783.662mil|Location2.X=1856.56mil|Location1.Y=2483.542mil|Location2.Y=2506.834mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1783.662mil|Location2.X=1856.56mil|Location1.Y=2483.542mil|Location2.Y=2506.834mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad U5-8(45.581mm,63.378mm) on Top Layer And Pad U5-6(46.881mm,63.378mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1709.675mil|Location2.X=1805.378mil|Location1.Y=2477.693mil|Location2.Y=2515.157mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1709.675mil|Location2.X=1805.378mil|Location1.Y=2477.693mil|Location2.Y=2515.157mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad C17-2(43.952mm,63.409mm) on Top Layer And Pad U5-8(45.581mm,63.378mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2090.591mil|Location2.X=2203.025mil|Location1.Y=3668.834mil|Location2.Y=3707.298mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2090.591mil|Location2.X=2203.025mil|Location1.Y=3668.834mil|Location2.Y=3707.298mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad C4-1(53.627mm,93.69mm) on Top Layer And Pad C5-2(55.431mm,93.664mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1789.952mil|Location2.X=1826.48mil|Location1.Y=2656.865mil|Location2.Y=2769.369mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1789.952mil|Location2.X=1826.48mil|Location1.Y=2656.865mil|Location2.Y=2769.369mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad R10-2(45.891mm,68.01mm) on Top Layer And Pad R9-2(45.967mm,69.816mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1980.102mil|Location2.X=2017.056mil|Location1.Y=3960.865mil|Location2.Y=4092.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1980.102mil|Location2.X=2017.056mil|Location1.Y=3960.865mil|Location2.Y=4092.267mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad R11-2(50.72mm,103.418mm) on Top Layer And Pad R13-2(50.807mm,101.132mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3294.481mil|Location2.X=3422.103mil|Location1.Y=3062.457mil|Location2.Y=3123.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3294.481mil|Location2.X=3422.103mil|Location1.Y=3062.457mil|Location2.Y=3123.543mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad U?-12(84.031mm,78.562mm) on Top Layer And Pad U?-14(86.571mm,78.562mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3194.481mil|Location2.X=3322.103mil|Location1.Y=3062.457mil|Location2.Y=3123.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3194.481mil|Location2.X=3322.103mil|Location1.Y=3062.457mil|Location2.Y=3123.543mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad U?-10(81.491mm,78.562mm) on Top Layer And Pad U?-12(84.031mm,78.562mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1783.662mil|Location2.X=1830.968mil|Location1.Y=2483.542mil|Location2.Y=2583.212mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1783.662mil|Location2.X=1830.968mil|Location1.Y=2483.542mil|Location2.Y=2583.212mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad U5-8(45.581mm,63.378mm) on Top Layer And Pad U5-2(46.231mm,65.318mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2249.724mil|Location2.X=2369.158mil|Location1.Y=3484.607mil|Location2.Y=3553.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2249.724mil|Location2.X=2369.158mil|Location1.Y=3484.607mil|Location2.Y=3553.833mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad U1-30(57.594mm,88.685mm) on Top Layer And Pad C3-1(59.701mm,89.742mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3394.481mil|Location2.X=3429.914mil|Location1.Y=2944.299mil|Location2.Y=3123.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3394.481mil|Location2.X=3429.914mil|Location1.Y=2944.299mil|Location2.Y=3123.543mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad U?-14(86.571mm,78.562mm) on Top Layer And Pad R5-2(86.694mm,75.311mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2448.71mil|Location2.X=2646.393mil|Location1.Y=2522.865mil|Location2.Y=2564.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2448.71mil|Location2.X=2646.393mil|Location1.Y=2522.865mil|Location2.Y=2564.267mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad C10-1(62.673mm,64.607mm) on Top Layer And Pad VR1-2(66.043mm,64.581mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950mil|Location2.X=2131.993mil|Location1.Y=3669.834mil|Location2.Y=3707.298mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950mil|Location2.X=2131.993mil|Location1.Y=3669.834mil|Location2.Y=3707.298mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Via (49.886mm,93.675mm) from Top Layer to Bottom Layer And Pad C4-1(53.627mm,93.69mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2058.778mil|Location2.X=2110.023mil|Location1.Y=3348.78mil|Location2.Y=3498.449mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2058.778mil|Location2.X=2110.023mil|Location1.Y=3348.78mil|Location2.Y=3498.449mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad U1-11(52.744mm,88.685mm) on Top Layer And Pad U1-17(53.419mm,85.51mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.496mil|Location2.X=1978mil|Location1.Y=3575.559mil|Location2.Y=3702mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.496mil|Location2.X=1978mil|Location1.Y=3575.559mil|Location2.Y=3702mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad P2-1(43.46mm,91.62mm) on Multi-Layer And Via (49.886mm,93.675mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2448.71mil|Location2.X=2486.174mil|Location1.Y=2522.865mil|Location2.Y=2963mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2448.71mil|Location2.X=2486.174mil|Location1.Y=2522.865mil|Location2.Y=2963mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad C10-1(62.673mm,64.607mm) on Top Layer And Via (62.713mm,74.905mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2233.977mil|Location2.X=2285.22mil|Location1.Y=3484.607mil|Location2.Y=3575.222mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2233.977mil|Location2.X=2285.22mil|Location1.Y=3484.607mil|Location2.Y=3575.222mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad U1-1(56.919mm,90.36mm) on Top Layer And Pad U1-30(57.594mm,88.685mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1789.952mil|Location2.X=1830.968mil|Location1.Y=2559.92mil|Location2.Y=2698.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1789.952mil|Location2.X=1830.968mil|Location1.Y=2559.92mil|Location2.Y=2698.267mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad R10-2(45.891mm,68.01mm) on Top Layer And Pad U5-2(46.231mm,65.318mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950mil|Location2.X=2188.763mil|Location1.Y=3539.726mil|Location2.Y=3702mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950mil|Location2.X=2188.763mil|Location1.Y=3539.726mil|Location2.Y=3702mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Via (49.886mm,93.675mm) from Top Layer to Bottom Layer And Pad U1-4(55.419mm,90.36mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950mil|Location2.X=2094.274mil|Location1.Y=3484.607mil|Location2.Y=3702mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950mil|Location2.X=2094.274mil|Location1.Y=3484.607mil|Location2.Y=3702mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Via (49.886mm,93.675mm) from Top Layer to Bottom Layer And Pad U1-11(52.744mm,88.685mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950mil|Location2.X=2017.056mil|Location1.Y=3674mil|Location2.Y=4002.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950mil|Location2.X=2017.056mil|Location1.Y=3674mil|Location2.Y=4002.267mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Via (49.886mm,93.675mm) from Top Layer to Bottom Layer And Pad R13-2(50.807mm,101.132mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1792.952mil|Location2.X=2483mil|Location1.Y=2727.967mil|Location2.Y=2963mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1792.952mil|Location2.X=2483mil|Location1.Y=2727.967mil|Location2.Y=2963mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Pad R9-2(45.967mm,69.816mm) on Top Layer And Via (62.713mm,74.905mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2455mil|Location2.X=3222.103mil|Location1.Y=2935mil|Location2.Y=3123.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2455mil|Location2.X=3222.103mil|Location1.Y=2935mil|Location2.Y=3123.543mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Via (62.713mm,74.905mm) from Top Layer to Bottom Layer And Pad U?-10(81.491mm,78.562mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950mil|Location2.X=2483mil|Location1.Y=2935mil|Location2.Y=3702mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950mil|Location2.X=2483mil|Location1.Y=2935mil|Location2.Y=3702mil|Absolute=True">Un-Routed Net Constraint: Net 3v3 Between Via (49.886mm,93.675mm) from Top Layer to Bottom Layer And Via (62.713mm,74.905mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.496mil|Location2.X=2094.274mil|Location1.Y=3075.559mil|Location2.Y=3439.395mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.496mil|Location2.X=2094.274mil|Location1.Y=3075.559mil|Location2.Y=3439.395mil|Absolute=True">Un-Routed Net Constraint: Net GPIO2 Between Pad P2-11(43.46mm,78.92mm) on Multi-Layer And Pad U1-14(52.744mm,87.185mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.496mil|Location2.X=2094.274mil|Location1.Y=3175.559mil|Location2.Y=3478.765mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.496mil|Location2.X=2094.274mil|Location1.Y=3175.559mil|Location2.Y=3478.765mil|Absolute=True">Un-Routed Net Constraint: Net MTCK Between Pad P2-9(43.46mm,81.46mm) on Multi-Layer And Pad U1-12(52.744mm,88.185mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1779.496mil|Location2.X=2094.274mil|Location1.Y=3275.559mil|Location2.Y=3518.135mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1779.496mil|Location2.X=2094.274mil|Location1.Y=3275.559mil|Location2.Y=3518.135mil|Absolute=True">Un-Routed Net Constraint: Net MTDI Between Pad P2-8(46mm,84mm) on Multi-Layer And Pad U1-10(52.744mm,89.185mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1779.496mil|Location2.X=2094.274mil|Location1.Y=3175.559mil|Location2.Y=3459.079mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1779.496mil|Location2.X=2094.274mil|Location1.Y=3175.559mil|Location2.Y=3459.079mil|Absolute=True">Un-Routed Net Constraint: Net MTDO Between Pad P2-10(46mm,81.46mm) on Multi-Layer And Pad U1-13(52.744mm,87.685mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.496mil|Location2.X=2094.274mil|Location1.Y=3275.559mil|Location2.Y=3537.819mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.496mil|Location2.X=2094.274mil|Location1.Y=3275.559mil|Location2.Y=3537.819mil|Absolute=True">Un-Routed Net Constraint: Net MTMS Between Pad P2-7(43.46mm,84mm) on Multi-Layer And Pad U1-9(52.744mm,89.685mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1834.844mil|Location2.X=1879.63mil|Location1.Y=2559.92mil|Location2.Y=2769.369mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1834.844mil|Location2.X=1879.63mil|Location1.Y=2559.92mil|Location2.Y=2769.369mil|Absolute=True">Un-Routed Net Constraint: Net NetR9_1 Between Pad U5-3(46.881mm,65.318mm) on Top Layer And Pad R9-1(47.317mm,69.816mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1846.102mil|Location2.X=2094.274mil|Location1.Y=2727.967mil|Location2.Y=3400.025mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1846.102mil|Location2.X=2094.274mil|Location1.Y=2727.967mil|Location2.Y=3400.025mil|Absolute=True">Un-Routed Net Constraint: Net NetR9_1 Between Pad R9-1(47.317mm,69.816mm) on Top Layer And Pad U1-16(52.744mm,86.185mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1843.102mil|Location2.X=1882.15mil|Location1.Y=2559.92mil|Location2.Y=2698.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1843.102mil|Location2.X=1882.15mil|Location1.Y=2559.92mil|Location2.Y=2698.267mil|Absolute=True">Un-Routed Net Constraint: Net NetR10_1 Between Pad R10-1(47.241mm,68.01mm) on Top Layer And Pad U5-4(47.531mm,65.318mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1843.102mil|Location2.X=2094.274mil|Location1.Y=2656.865mil|Location2.Y=3419.709mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1843.102mil|Location2.X=2094.274mil|Location1.Y=2656.865mil|Location2.Y=3419.709mil|Absolute=True">Un-Routed Net Constraint: Net NetR10_1 Between Pad R10-1(47.241mm,68.01mm) on Top Layer And Pad U1-15(52.744mm,86.685mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1847.504mil|Location2.X=1963.906mil|Location1.Y=3960.865mil|Location2.Y=4002.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1847.504mil|Location2.X=1963.906mil|Location1.Y=3960.865mil|Location2.Y=4002.267mil|Absolute=True">Un-Routed Net Constraint: Net NetD2_1 Between Pad D2-1(47.377mm,101.132mm) on Top Layer And Pad R13-1(49.457mm,101.132mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1852.544mil|Location2.X=1965.188mil|Location1.Y=3863.3mil|Location2.Y=3904.702mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1852.544mil|Location2.X=1965.188mil|Location1.Y=3863.3mil|Location2.Y=3904.702mil|Absolute=True">Un-Routed Net Constraint: Net NetD3_1 Between Pad D3-1(47.505mm,98.592mm) on Top Layer And Pad R14-1(49.49mm,98.654mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDTOOAC3DYKHTLL312I5XBXSTB0M1I0KXOL4HSGCJZXEQ4BPIY1KAI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Modified Polygon (Allow modified: No), (Allow shelved: No)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1586mil|Location2.X=3532mil|Location1.Y=2383mil|Location2.Y=4310mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1586mil|Location2.X=3532mil|Location1.Y=2383mil|Location2.Y=4310mil|Absolute=True">Modified Polygon: Polygon Shelved  (Top Layer-No Net) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID1M0XRWDEJ2S4GEFQRX2DQWSTEEMAAVQVFKFN1ZXI2L3YW1LHKFE"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3153.167mil|Location2.X=3160.833mil|Location1.Y=3023.167mil|Location2.Y=3030.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3153.167mil|Location2.X=3160.833mil|Location1.Y=3023.167mil|Location2.Y=3030.833mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 0.254mm) Between Via (80.188mm,76.886mm) from Top Layer to Bottom Layer And Via (80.188mm,76.886mm) from Top Layer to Bottom Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDXMHK23ZMFUIBP3W42JOTXPP4OMJ2OPDPGALXKJFL13WC0BGHOQPB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.2mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2514.029mil|Location2.X=2523.153mil|Location1.Y=3432.552mil|Location2.Y=3441.676mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2514.029mil|Location2.X=2523.153mil|Location1.Y=3432.552mil|Location2.Y=3441.676mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.198mm &lt; 0.2mm) Between Pad Y1-1(64.498mm,87.878mm) on Top Layer And Pad Y1-4(64.498mm,86.728mm) on Top Layer [Top Solder] Mask Sliver [0.198mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2456.941mil|Location2.X=2466.065mil|Location1.Y=3432.552mil|Location2.Y=3441.676mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2456.941mil|Location2.X=2466.065mil|Location1.Y=3432.552mil|Location2.Y=3441.676mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.198mm &lt; 0.2mm) Between Pad Y1-2(63.048mm,87.878mm) on Top Layer And Pad Y1-3(63.048mm,86.728mm) on Top Layer [Top Solder] Mask Sliver [0.198mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2226.493mil|Location2.X=2235.617mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2226.493mil|Location2.X=2235.617mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-2(56.419mm,90.36mm) on Top Layer And Pad U1-1(56.919mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2236.336mil|Location2.X=2245.46mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2236.336mil|Location2.X=2245.46mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-1(56.919mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2206.807mil|Location2.X=2215.931mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2206.807mil|Location2.X=2215.931mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-3(55.919mm,90.36mm) on Top Layer And Pad U1-2(56.419mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2216.65mil|Location2.X=2225.774mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2216.65mil|Location2.X=2225.774mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-2(56.419mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2187.122mil|Location2.X=2196.246mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2187.122mil|Location2.X=2196.246mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-4(55.419mm,90.36mm) on Top Layer And Pad U1-3(55.919mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2196.964mil|Location2.X=2206.088mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2196.964mil|Location2.X=2206.088mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-3(55.919mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2167.437mil|Location2.X=2176.561mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2167.437mil|Location2.X=2176.561mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-5(54.919mm,90.36mm) on Top Layer And Pad U1-4(55.419mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2177.28mil|Location2.X=2186.404mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2177.28mil|Location2.X=2186.404mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-4(55.419mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2147.752mil|Location2.X=2156.876mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2147.752mil|Location2.X=2156.876mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-6(54.419mm,90.36mm) on Top Layer And Pad U1-5(54.919mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2157.594mil|Location2.X=2166.718mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2157.594mil|Location2.X=2166.718mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-5(54.919mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2128.067mil|Location2.X=2137.191mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2128.067mil|Location2.X=2137.191mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-7(53.919mm,90.36mm) on Top Layer And Pad U1-6(54.419mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2137.91mil|Location2.X=2147.034mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2137.91mil|Location2.X=2147.034mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-6(54.419mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2108.382mil|Location2.X=2117.506mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2108.382mil|Location2.X=2117.506mil|Location1.Y=3542.085mil|Location2.Y=3551.209mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-8(53.419mm,90.36mm) on Top Layer And Pad U1-7(53.919mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2118.224mil|Location2.X=2127.348mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2118.224mil|Location2.X=2127.348mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-7(53.919mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2116.081mil|Location2.X=2125.205mil|Location1.Y=3573.629mil|Location2.Y=3582.753mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2116.081mil|Location2.X=2125.205mil|Location1.Y=3573.629mil|Location2.Y=3582.753mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.163mm &lt; 0.2mm) Between Via (53.772mm,91.313mm) from Top Layer to Bottom Layer And Pad U1-7(53.919mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.163mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2098.54mil|Location2.X=2107.664mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2098.54mil|Location2.X=2107.664mil|Location1.Y=3533.718mil|Location2.Y=3542.842mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-8(53.419mm,90.36mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3516.494mil|Location2.Y=3525.618mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3516.494mil|Location2.Y=3525.618mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-10(52.744mm,89.185mm) on Top Layer And Pad U1-9(52.744mm,89.685mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3526.336mil|Location2.Y=3535.46mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3526.336mil|Location2.Y=3535.46mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-9(52.744mm,89.685mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3496.809mil|Location2.Y=3505.933mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3496.809mil|Location2.Y=3505.933mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-11(52.744mm,88.685mm) on Top Layer And Pad U1-10(52.744mm,89.185mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3506.652mil|Location2.Y=3515.776mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3506.652mil|Location2.Y=3515.776mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-10(52.744mm,89.185mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3477.124mil|Location2.Y=3486.248mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3477.124mil|Location2.Y=3486.248mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-12(52.744mm,88.185mm) on Top Layer And Pad U1-11(52.744mm,88.685mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3486.966mil|Location2.Y=3496.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3486.966mil|Location2.Y=3496.09mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-11(52.744mm,88.685mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3457.439mil|Location2.Y=3466.563mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3457.439mil|Location2.Y=3466.563mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-13(52.744mm,87.685mm) on Top Layer And Pad U1-12(52.744mm,88.185mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3467.282mil|Location2.Y=3476.406mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3467.282mil|Location2.Y=3476.406mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-12(52.744mm,88.185mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3437.754mil|Location2.Y=3446.878mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3437.754mil|Location2.Y=3446.878mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-14(52.744mm,87.185mm) on Top Layer And Pad U1-13(52.744mm,87.685mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3447.596mil|Location2.Y=3456.72mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3447.596mil|Location2.Y=3456.72mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-13(52.744mm,87.685mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3418.069mil|Location2.Y=3427.193mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3418.069mil|Location2.Y=3427.193mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-15(52.744mm,86.685mm) on Top Layer And Pad U1-14(52.744mm,87.185mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3427.912mil|Location2.Y=3437.036mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3427.912mil|Location2.Y=3437.036mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-14(52.744mm,87.185mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3398.384mil|Location2.Y=3407.508mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2061.137mil|Location2.X=2070.261mil|Location1.Y=3398.384mil|Location2.Y=3407.508mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-16(52.744mm,86.185mm) on Top Layer And Pad U1-15(52.744mm,86.685mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3408.226mil|Location2.Y=3417.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3408.226mil|Location2.Y=3417.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-15(52.744mm,86.685mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3388.542mil|Location2.Y=3397.666mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.158mil|Location2.X=2100.282mil|Location1.Y=3388.542mil|Location2.Y=3397.666mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-16(52.744mm,86.185mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2108.382mil|Location2.X=2117.506mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2108.382mil|Location2.X=2117.506mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-18(53.919mm,85.51mm) on Top Layer And Pad U1-17(53.419mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2098.54mil|Location2.X=2107.664mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2098.54mil|Location2.X=2107.664mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-17(53.419mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2128.067mil|Location2.X=2137.191mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2128.067mil|Location2.X=2137.191mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-19(54.419mm,85.51mm) on Top Layer And Pad U1-18(53.919mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2118.224mil|Location2.X=2127.348mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2118.224mil|Location2.X=2127.348mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-18(53.919mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2137.91mil|Location2.X=2147.034mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2137.91mil|Location2.X=2147.034mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-19(54.419mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2147.752mil|Location2.X=2156.876mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2147.752mil|Location2.X=2156.876mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-20(54.919mm,85.51mm) on Top Layer And Pad U1-19(54.419mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2167.437mil|Location2.X=2176.561mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2167.437mil|Location2.X=2176.561mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-21(55.419mm,85.51mm) on Top Layer And Pad U1-20(54.919mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2157.594mil|Location2.X=2166.718mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2157.594mil|Location2.X=2166.718mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-20(54.919mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2187.122mil|Location2.X=2196.246mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2187.122mil|Location2.X=2196.246mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-22(55.919mm,85.51mm) on Top Layer And Pad U1-21(55.419mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2177.28mil|Location2.X=2186.404mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2177.28mil|Location2.X=2186.404mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-21(55.419mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2206.807mil|Location2.X=2215.931mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2206.807mil|Location2.X=2215.931mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-23(56.419mm,85.51mm) on Top Layer And Pad U1-22(55.919mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2196.964mil|Location2.X=2206.088mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2196.964mil|Location2.X=2206.088mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-22(55.919mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2216.65mil|Location2.X=2225.774mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2216.65mil|Location2.X=2225.774mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-23(56.419mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2226.493mil|Location2.X=2235.617mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2226.493mil|Location2.X=2235.617mil|Location1.Y=3351.139mil|Location2.Y=3360.263mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-24(56.919mm,85.51mm) on Top Layer And Pad U1-23(56.419mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2236.336mil|Location2.X=2245.46mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2236.336mil|Location2.X=2245.46mil|Location1.Y=3381.159mil|Location2.Y=3390.283mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-24(56.919mm,85.51mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3398.384mil|Location2.Y=3407.508mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3398.384mil|Location2.Y=3407.508mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-26(57.594mm,86.685mm) on Top Layer And Pad U1-25(57.594mm,86.185mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3388.542mil|Location2.Y=3397.666mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3388.542mil|Location2.Y=3397.666mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-25(57.594mm,86.185mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3418.069mil|Location2.Y=3427.193mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3418.069mil|Location2.Y=3427.193mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-27(57.594mm,87.185mm) on Top Layer And Pad U1-26(57.594mm,86.685mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3408.226mil|Location2.Y=3417.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3408.226mil|Location2.Y=3417.35mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-26(57.594mm,86.685mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3437.754mil|Location2.Y=3446.878mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3437.754mil|Location2.Y=3446.878mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-28(57.594mm,87.685mm) on Top Layer And Pad U1-27(57.594mm,87.185mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3427.912mil|Location2.Y=3437.036mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3427.912mil|Location2.Y=3437.036mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-27(57.594mm,87.185mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3457.439mil|Location2.Y=3466.563mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3457.439mil|Location2.Y=3466.563mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-29(57.594mm,88.185mm) on Top Layer And Pad U1-28(57.594mm,87.685mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3447.596mil|Location2.Y=3456.72mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3447.596mil|Location2.Y=3456.72mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-28(57.594mm,87.685mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3477.124mil|Location2.Y=3486.248mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3477.124mil|Location2.Y=3486.248mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-30(57.594mm,88.685mm) on Top Layer And Pad U1-29(57.594mm,88.185mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3467.282mil|Location2.Y=3476.406mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3467.282mil|Location2.Y=3476.406mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-29(57.594mm,88.185mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3496.809mil|Location2.Y=3505.933mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3496.809mil|Location2.Y=3505.933mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-31(57.594mm,89.185mm) on Top Layer And Pad U1-30(57.594mm,88.685mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3486.966mil|Location2.Y=3496.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3486.966mil|Location2.Y=3496.09mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-30(57.594mm,88.685mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3516.494mil|Location2.Y=3525.618mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2252.083mil|Location2.X=2261.207mil|Location1.Y=3516.494mil|Location2.Y=3525.618mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.2mm) Between Pad U1-32(57.594mm,89.685mm) on Top Layer And Pad U1-31(57.594mm,89.185mm) on Top Layer [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3506.652mil|Location2.Y=3515.776mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3506.652mil|Location2.Y=3515.776mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-31(57.594mm,89.185mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3526.336mil|Location2.Y=3535.46mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2243.717mil|Location2.X=2252.841mil|Location1.Y=3526.336mil|Location2.Y=3535.46mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.073mm &lt; 0.2mm) Between Pad U1-33(55.169mm,87.935mm) on Top Layer And Pad U1-32(57.594mm,89.685mm) on Top Layer [Top Solder] Mask Sliver [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1853.935mil|Location2.X=1863.059mil|Location1.Y=2478.98mil|Location2.Y=2488.104mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1853.935mil|Location2.X=1863.059mil|Location1.Y=2478.98mil|Location2.Y=2488.104mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mm &lt; 0.2mm) Between Pad U5-6(46.881mm,63.378mm) on Top Layer And Pad U5-5(47.531mm,63.378mm) on Top Layer [Top Solder] Mask Sliver [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1802.753mil|Location2.X=1811.877mil|Location1.Y=2478.98mil|Location2.Y=2488.104mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1802.753mil|Location2.X=1811.877mil|Location1.Y=2478.98mil|Location2.Y=2488.104mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mm &lt; 0.2mm) Between Pad U5-7(46.231mm,63.378mm) on Top Layer And Pad U5-8(45.581mm,63.378mm) on Top Layer [Top Solder] Mask Sliver [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1828.344mil|Location2.X=1837.468mil|Location1.Y=2478.98mil|Location2.Y=2488.104mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1828.344mil|Location2.X=1837.468mil|Location1.Y=2478.98mil|Location2.Y=2488.104mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mm &lt; 0.2mm) Between Pad U5-6(46.881mm,63.378mm) on Top Layer And Pad U5-7(46.231mm,63.378mm) on Top Layer [Top Solder] Mask Sliver [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1853.935mil|Location2.X=1863.059mil|Location1.Y=2555.358mil|Location2.Y=2564.482mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1853.935mil|Location2.X=1863.059mil|Location1.Y=2555.358mil|Location2.Y=2564.482mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mm &lt; 0.2mm) Between Pad U5-3(46.881mm,65.318mm) on Top Layer And Pad U5-4(47.531mm,65.318mm) on Top Layer [Top Solder] Mask Sliver [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1802.753mil|Location2.X=1811.877mil|Location1.Y=2555.358mil|Location2.Y=2564.482mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1802.753mil|Location2.X=1811.877mil|Location1.Y=2555.358mil|Location2.Y=2564.482mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mm &lt; 0.2mm) Between Pad U5-2(46.231mm,65.318mm) on Top Layer And Pad U5-1(45.581mm,65.318mm) on Top Layer [Top Solder] Mask Sliver [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1828.344mil|Location2.X=1837.468mil|Location1.Y=2555.358mil|Location2.Y=2564.482mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1828.344mil|Location2.X=1837.468mil|Location1.Y=2555.358mil|Location2.Y=2564.482mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mm &lt; 0.2mm) Between Pad U5-3(46.881mm,65.318mm) on Top Layer And Pad U5-2(46.231mm,65.318mm) on Top Layer [Top Solder] Mask Sliver [0.098mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDYOEH5MW5HWOFL4KRAL1PG5FDMPJBEQXPXMOAJ1F5RDJBRAT1ECXK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Net Antennae (Tolerance=0mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2451.5mil|Location2.X=2494.681mil|Location1.Y=2931.5mil|Location2.Y=2998.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2451.5mil|Location2.X=2494.681mil|Location1.Y=2931.5mil|Location2.Y=2998.302mil|Absolute=True">Net Antennae: Via (62.713mm,74.905mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1946.5mil|Location2.X=1989.681mil|Location1.Y=3670.5mil|Location2.Y=3737.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\ESP8266.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1946.5mil|Location2.X=1989.681mil|Location1.Y=3670.5mil|Location2.Y=3737.302mil|Absolute=True">Net Antennae: Via (49.886mm,93.675mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

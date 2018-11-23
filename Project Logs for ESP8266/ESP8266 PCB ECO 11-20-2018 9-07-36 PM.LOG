@@ -1,0 +1,14 @@
+Added Component: Designator=Q?(TO5)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Digi-Key_Part_Number"; Value = "269-4955-ND"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Digi-Key_Purchase_URL"; Value = "https://www.digikey.com/product-detail/en/zilog/ZRE200GE/269-4955-ND/5147335?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Zilog"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "ZRE200GE"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "TO-5-3 Zilog"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/ZRE200GE/Zilog/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=NetC16_2 Pin=Q?-1
+Added Pin To Net: NetName=OP1_P Pin=Q?-2
+Added Pin To Net: NetName=GND Pin=Q?-3
+Added Member To Class: ClassName=Sensor Member=Component Q? ZRE200GE
+Added Room: Name=MCU

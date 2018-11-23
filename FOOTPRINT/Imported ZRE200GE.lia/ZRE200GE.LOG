@@ -1,0 +1,33 @@
+PCAD Importer Log
+Project : ZRE200GE.LibPkg
+
+Section : D:\OneDrive\workspace\altium\Work\FEEL\ESP8266\FOOTPRINT\ZRE200GE.lia
+    Section : PCB Library - ZRE200GE.PcbLib
+        Section : Load Messages
+            Warning - 1 : Skipping Token PIR On Line 156
+            Warning - 1 : Skipping Token attachedSymbol On Line 215
+        EndSection
+
+        Section : Import Messages
+            Warning : Default polygonal pad shape for signal layers has been made multilayer
+            Warning : Default polygonal pad shape for signal layers has been made multilayer
+            Warning : Default polygonal pad shape for signal layers has been made multilayer
+        EndSection
+    EndSection
+
+    Section : SCH Library - ZRE200GE.SchLib
+        Section : Parsing Messages
+            Warning - 1 : Skipping Token padStyleDef On Line 9
+            Warning - 1 : Skipping Token multiLayer On Line 134
+            Warning - 1 : Skipping Token layerContents On Line 139
+            Warning - 1 : Skipping Token layerContents On Line 146
+            Warning - 1 : Skipping Token layerContents On Line 150
+            Warning - 1 : Skipping Token isVisible On Line 190
+            Warning - 1 : Skipping Token isVisible On Line 191
+            Warning - 1 : Skipping Token isVisible On Line 192
+        EndSection
+
+        Section : Generating SCH Library - ZRE200GE.SchLib
+        EndSection
+    EndSection
+EndSection

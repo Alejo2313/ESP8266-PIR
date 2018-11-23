@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=CH_PU Pin=P2-5
+Removed Pin From Net: NetName=GPIO16 Pin=P2-6
+Added Pin To Net: NetName=GPIO16 Pin=P2-5
+Added Pin To Net: NetName=CH_PU Pin=P2-6
+Added Pin To Net: NetName=NetU1_24 Pin=U1-24
+Added Pin To Net: NetName=NetU1_24 Pin=U?-8
+Added Net: Name=NetU1_24
+Added Room: Name=MCU
+Added Room: Name=Sensor
