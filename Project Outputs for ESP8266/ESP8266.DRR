@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------------------------------------------------------------------
-NCDrill File Report For: ESP8266.PcbDoc   11/23/2018  1:24:22 PM
+NCDrill File Report For: ESP8266.PcbDoc   11/28/2018  12:01:19 AM
 ----------------------------------------------------------------------------------------------------------------------------------
 
 Layer Pair : Top Layer to Bottom Layer
@@ -7,11 +7,11 @@ ASCII Plated RoundHoles File : ESP8266-Plated.TXT
 
 Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
 ----------------------------------------------------------------------------------------------------------------------------------
-T1      12mil (0.305mm)                                           Round             17        PTH        6.84inch (173.74mm)
-T2      24mil (0.6mm)                                             Round             4         PTH        1.07inch (27.23mm)
+T1      12mil (0.305mm)                                           Round             50        PTH        8.26inch (209.75mm)
+T2      24mil (0.6mm)                                             Round             4         PTH        1.25inch (31.82mm)
 T3      32mil (0.813mm)                                           Round             3         PTH        0.34inch (8.67mm)
 T4      35mil (0.9mm)                                             Round             12        PTH        1.10inch (27.94mm)
 ----------------------------------------------------------------------------------------------------------------------------------
-Totals                                                                              36
+Totals                                                                              69
 
 Total Processing Time (hh:mm:ss) : 00:00:00
